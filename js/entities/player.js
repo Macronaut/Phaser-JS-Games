@@ -6,6 +6,7 @@ var PlayerClass = function (game, x, y) {
     this.body.drag.x = 100;
     this.anchor.setTo(.5);
     this.numSpeed = 500;
+    this.isDone = false;
     
     /*this.oWeapon = game.add.weapon(30, 'sProjectile');
     
@@ -31,23 +32,32 @@ PlayerClass.prototype.update = function () {
     kLeft : game.input.keyboard.isDown(Phaser.Keyboard.LEFT),
     kRight : game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) }
 
-  if(this.numShoot > 0) { this.numShoot -= .1; }
+  if(!this.isDone){
 
-  if(this.numReset > 0) { this.numReset--; } 
-  else { this.tint = 0xFFFFFF; }
-  
-  if (oKeys.kRight) this.body.acceleration.x = this.numSpeed;
-  else if(oKeys.kLeft) this.body.acceleration.x = -this.numSpeed;    
-  else this.body.acceleration.x = 0;
-  
-  if(oKeys.kShoot && this.numShoot <= 0 && game.oGroups.gBullets.children.length < this.numBullets) {
-    game.oGroups.gBullets.add(new BulletClass(game, this.x, this.y - this.height));
-    this.numShoot = .75;
-  }
+    if(this.numShoot > 0) { this.numShoot -= .1; }
 
-  if(this.numHP <= 0) {
-    new ExplosionClass(game, this.x, this.y);
-    game.camera.shake(0.01, 250);
-    this.destroy();
+    if(this.numReset > 0) { this.numReset--; } 
+    else { this.tint = 0xFFFFFF; }
+    
+    if (oKeys.kRight) this.body.acceleration.x = this.numSpeed;
+    else if(oKeys.kLeft) this.body.acceleration.x = -this.numSpeed;    
+    else this.body.acceleration.x = 0;
+    
+    if(oKeys.kShoot && this.numShoot <= 0 && game.oGroups.gBullets.children.length < this.numBullets) {
+      game.oGroups.gBullets.add(new BulletClass(game, this.x, this.y - this.height));
+      this.numShoot = .75;
+    }
+
+    if(this.numHP <= 0) {
+      new ExplosionClass(game, this.x, this.y);
+      game.camera.shake(0.01, 250);
+      this.destroy();
+    } 
+
+  } else {
+    this.body.velocity.y -= .5;
+    this.body.velocity.x = 0;    
+    this.body.collideWorldBounds = false;
+    if(this.y < 0) this.destroy();    
   }
 };

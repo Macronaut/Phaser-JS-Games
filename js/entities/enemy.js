@@ -58,9 +58,12 @@ EnemyClass.prototype.update = function () {
         p_Enemy.destroy();
      })
 
-    if(this.numHP <= 0){
-        new EffectClass(game, this.x, this.y, 'sExplosion', true);        
-        this.destroy();
+    if(this.numHP <= 0){        
+        new EffectClass(game, this.x, this.y, 'sExplosion', true);
+        console.log("length :: " + game.oGroups.gEnemies.children.length);
+        console.log("oSpawner :: " + game.oSpawner);
+        this.destroy();        
+        game.checkWave();        
     }
 
 };

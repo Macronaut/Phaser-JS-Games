@@ -1,31 +1,13 @@
-oWaves = [
-  {
-    enemies: [
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 },
-      { type: "EnemyClass", posX: 160 }
-    ]
-  }
-]
+arrWaves = [
+  [
+    { type: "EnemyClass", posX: 160 },
+    { type: "EnemyClass", posX: 160 },
+    { type: "EnemyClass", posX: 160 }
+  ], [
+    { type: "EnemyClass", posX: 160 },
+    { type: "EnemyClass", posX: 160 },
+    { type: "EnemyClass", posX: 160 },
+    { type: "EnemyClass", posX: 160 },
+    { type: "EnemyClass", posX: 160 }
+  ]
+]  
