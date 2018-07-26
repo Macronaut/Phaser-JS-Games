@@ -29,6 +29,11 @@ Enemy.prototype.receiveDamage = function(damage) {
 }
 
 Enemy.prototype.kill = function(shake) {
-  if(shake) game.camera.shake(0.01, 250);
+
+  if(shake){
+    new Effect ( this.x, this.y, "sExplosion");
+    game.camera.shake(0.01, 250);
+  }
+
   this.destroy();
 }

@@ -11,7 +11,7 @@ var Play = {
         Object.keys(oGroups).forEach( function(element, index) { oGroups[element] = game.add.group(); } )
 
         oPlayer = new Player( game.world.centerX, game.world.height - game.cache.getImage("sPlayer").height );
-        new Octopus( game.world.centerX, game.cache.getImage("sOctopus").height/2 );
+        new Octopus( game.world.centerX, game.cache.getImage("sOctopus").height/2 );                
     },
 
     update : function() {
@@ -26,6 +26,6 @@ var Play = {
         player.receiveDamage(5);
         enemy.destroy();
       });
-      
+
     }
 };

@@ -1,6 +1,7 @@
 var Intro = {
 
     preload:function(){
+        game.load.spritesheet('sExplosion', './media/effects/fx-1.png', 38, 38);
         game.load.image('sBackground', './media/backgrounds/1.png');
         game.load.image('sProjectile', './media/shots/1.png');
         game.load.image('sOctopus', './media/ships/10.png');
