@@ -1,69 +1,31 @@
-var EnemyClass = function (game, x, y) {
-    Phaser.Sprite.call(this, game, x, y, "sEnemy");
+var Enemy = function (x, y, sprite) {
+    Phaser.Sprite.call(this, game, x, y, sprite);
+
     game.physics.enable(this, Phaser.Physics.ARCADE);
-    this.body.velocity.x = game.math.random() > .5 ? 50 : -50;    
-    this.body.velocity.y = 50;    
-    this.anchor.setTo(.5);    
-    this.numTimer = 30;
-    this.numReset = 0;    
-    this.numHP = 3;
-
-    this.events.onOutOfBounds.add( function(){ this.destroy(); }, this );
-
-    game.add.existing(this);
-
-    new EffectClass(game, this.x, this.y, 'sSpawn');
+    oGroups.gEnemies.add(this);
+    this.anchor.setTo(.5);
+    this.reset = 0;
 };
 
-EnemyClass.prototype = Object.create(Phaser.Sprite.prototype);
-EnemyClass.prototype.constructor = EnemyClass;
+Enemy.prototype = Object.create(Phaser.Sprite.prototype);
+Enemy.prototype.constructor = Enemy;
 
-EnemyClass.prototype.update = function () {
+Enemy.prototype.update = function () {
+  this.updateObject();
 
-    if(this.x < this.width/2) {
-        this.x = this.width/2;
-        this.body.velocity.x = 50;
-    }
-    
-    if(this.x > game.world.width - this.width/2) {
-        this.x = game.world.width - this.width/2;
-        this.body.velocity.x = -50;
-    }
+  if(this.hp <= 0) this.kill(shake = true);
 
-    if(this.y > game.world.height){ this.destroy(); }
-
-    if(this.numTimer > 0) {
-        this.numTimer++;
-    } else {        
-        this.body.velocity.x = game.math.random() > .5 ? 50 : -50;
-        this.numTimer = 30;
-    }
-
-    if(this.numReset > 0){ this.numReset--; }
-    else { this.tint = 0xFFFFFF; }
-    
-    game.physics.arcade.overlap(this, game.oGroups.gBullets, function(p_Enemy, p_Bullet){        
-        new EffectClass(game, p_Bullet.x, p_Bullet.y, 'sHit');
-        p_Enemy.tint = 0xFF0000;
-        p_Enemy.numReset = 10;
-        p_Enemy.numHP--;
-        p_Bullet.destroy();
-     });
-
-    game.physics.arcade.overlap(this, game.oGroups.gPlayer, function(p_Enemy, p_Player){
-        new EffectClass(game, p_Enemy.x, p_Enemy.y, 'sExplosion', true);        
-        p_Player.tint = 0xFF0000;
-        p_Player.numReset = 10;
-        p_Player.numHP--;
-        p_Enemy.destroy();
-     })
-
-    if(this.numHP <= 0){        
-        new EffectClass(game, this.x, this.y, 'sExplosion', true);
-        console.log("length :: " + game.oGroups.gEnemies.children.length);
-        console.log("oSpawner :: " + game.oSpawner);
-        this.destroy();        
-        game.checkWave();        
-    }
-
+  if(this.reset > 0) { this.reset -= .1; }
+  else { this.tint = 0xffffff; }
 };
+
+Enemy.prototype.receiveDamage = function(damage) {
+  this.hp = Math.max(0, ( this.hp - damage ) );
+  this.tint = 0xff0000;
+  this.reset = .5;
+}
+
+Enemy.prototype.kill = function(shake) {
+  if(shake) game.camera.shake(0.01, 250);
+  this.destroy();
+}

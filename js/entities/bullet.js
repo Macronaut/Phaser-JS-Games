@@ -1,13 +1,11 @@
-var BulletClass = function (game, x, y) {
+var BulletClass = function (x, y) {
   Phaser.Sprite.call(this, game, x, y, "sProjectile");
   game.physics.enable(this, Phaser.Physics.ARCADE);
 
-  this.anchor.setTo(.5);
   this.body.velocity.y = -350;
+  this.anchor.setTo(.5);
 
-  game.oGroups.gBullets.add(this);
-
-  game.add.existing(this);
+  oGroups.gBullets.add(this);
 };
 
 BulletClass.prototype = Object.create(Phaser.Sprite.prototype);
