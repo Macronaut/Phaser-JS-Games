@@ -1,16 +1,14 @@
-var TemplateClass = function (game, x, y) {
-    /*Phaser.Sprite.call(this, game, x, y, "REPLACE");
-    game.physics.enable(this, Phaser.Physics.ARCADE);
+var Template = function (x, y, sprite) {
+    Phaser.Sprite.call(this, game, x, y, sprite);
 
-    game.add.existing(this);*/
+    game.physics.enable(this, Phaser.Physics.ARCADE);
+    oGroups.gTemplate.add(this);
+    this.anchor.setTo(.5);
 };
 
-TemplateClass.prototype = Object.create(Phaser.Sprite.prototype);
-TemplateClass.prototype.constructor = TemplateClass;
+Template.prototype = Object.create(Phaser.Sprite.prototype);
+Template.prototype.constructor = Template;
 
-TemplateClass.prototype.update = function () {
-  /*var oKeys = {
-    kLeft : game.input.keyboard.isDown(Phaser.Keyboard.LEFT),
-    kRight : game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)
-  }*/
+Template.prototype.update = function () {
+  this.templateFunction();
 };

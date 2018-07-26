@@ -12,12 +12,15 @@ Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.update = function () {
   this.updateObject();
+  this.resetTint();
 
   if(this.hp <= 0) this.kill(shake = true);
+};
 
+Enemy.prototype.resetTint = function() {
   if(this.reset > 0) { this.reset -= .1; }
   else { this.tint = 0xffffff; }
-};
+}
 
 Enemy.prototype.receiveDamage = function(damage) {
   this.hp = Math.max(0, ( this.hp - damage ) );
