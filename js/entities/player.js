@@ -6,9 +6,9 @@ var Player = function (x, y) {
     this.anchor.setTo(.5, 1);
     this.body.gravity.y = 150;
     this.body.drag.x = 100;
-    this.smoothed = false;
-    this.speed = 75;
+    this.smoothed = false;    
     this.attemps = 0;
+    this.speed = 75;
     this.jump = 80;    
 
     this.animations.add("walk", [0,1]);
