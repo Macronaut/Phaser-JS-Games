@@ -29,7 +29,7 @@ var Play = {
           }
         })
 
-        //oPlayer = new Player( game.world.centerX, game.world.height - game.cache.getImage("sPlayer").height );        
+        if(oPlayer) game.camera.follow(oPlayer);
     },
 
     update : function() {

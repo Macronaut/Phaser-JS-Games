@@ -5,11 +5,10 @@ var Player = function (x, y) {
     this.body.maxVelocity.x = 100;
     this.anchor.setTo(.5, 1);
     this.body.gravity.y = 150;
-    this.body.drag.x = 100;
-    this.smoothed = false;    
+    this.body.drag.x = 100;    
     this.attemps = 0;
     this.speed = 75;
-    this.jump = 80;    
+    this.jump = 90;    
 
     this.animations.add("walk", [0,1]);
     this.animations.add("idle", [0]);    
@@ -39,7 +38,7 @@ Player.prototype.move = function() {
   if(this.body.velocity.x != 0) this.scale.x = Math.sign(this.body.velocity.x);
 
   if( this.body.onFloor() ) {
-    if(this.body.velocity.x != 0 ) {
+    if(oKeys.kLeft || oKeys.kRight) {
       this.animations.play("walk", 10, true);      
     } else {
       if(this.body.velocity.x != 0) {
@@ -54,6 +53,6 @@ Player.prototype.move = function() {
 
   if (oKeys.kRight) this.body.velocity.x = this.speed;
   else if(oKeys.kLeft) this.body.velocity.x = -this.speed;
-  else this.body.velocity.x = 0; 
+  //else this.body.acceleration.x = 0; 
 
 }

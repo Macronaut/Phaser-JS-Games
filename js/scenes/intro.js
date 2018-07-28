@@ -9,8 +9,7 @@ var Intro = {
 
     create : function(){
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        game.scale.pageAlignHorizontally = true;
-        game.stage.smoothed = false;
+        game.scale.pageAlignHorizontally = true;        
     },
 
     update : function(){
